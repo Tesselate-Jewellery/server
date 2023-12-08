@@ -18,7 +18,6 @@ const UserSchema = new mongoose.Schema({
     role: {
         type: mongoose.Types.ObjectId, 
         ref: 'Role',
-        default: 'user',  // Set the default value to 'user'
     },
     createdAt: {
       type: Date,

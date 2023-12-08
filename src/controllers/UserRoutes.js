@@ -11,6 +11,8 @@ const {
     getAllUsers, getSpecificUser, createUser, updateUser, deleteUser
 } = require('./UserFunctions');
 
+const { getRoleId } = require('../utils');
+
 
 
 
@@ -43,8 +45,8 @@ router.post('/sign-up', uniqueEmailCheck, handleErrors, async (request, response
         email: request.body.email,
         password: request.body.password,
         username: request.body.username,
-        country: request.body.country,
-        roleID: request.body.roleID
+        // Set default to "user", which will be an ObjectID
+        roleID: await getRoleId("user")
     }
     let newUserDoc = await createUser(userDetails);
 
@@ -85,8 +87,8 @@ router.post('/token-refresh', async(request, response) => {
 router.put('/:userID', async (request, response) => {
     let userDetails = {
         userID: request.params.userID,
-        updatedData: request.body.newUserData
-    };
+        updatedData: request.body
+    }
 
     response.json(await updateUser(userDetails));
 });

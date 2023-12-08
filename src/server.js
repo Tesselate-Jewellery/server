@@ -118,11 +118,11 @@ app.use("/roles", rolesController);
 const usersController = require("./controllers/UserRoutes");
 app.use("/users", usersController);
 
-const postsController = require("./controllers/OpalRoutes");
-app.use("/opals", postsController);
+const opalsController = require("./controllers/OpalRoutes");
+app.use("/opals", opalsController);
 
-const postsController = require("./controllers/QuoteRoutes");
-app.use("/quotes", postsController);
+const quotesController = require("./controllers/QuoteRoutes");
+app.use("/quotes", quotesController);
 
 // Keep this route at the end of this file, only before the module.exports!
 // A 404 route should only trigger if no preceding routes or middleware was run. 
