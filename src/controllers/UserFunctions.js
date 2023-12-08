@@ -120,10 +120,29 @@ async function createUser(userDetails){
     return await newUser.save();
 }
 
-async function updateUser(userDetails){
-    // Find user, update it, return the updated user data.
-    return await User.findByIdAndUpdate(userDetails.userID, userDetails.updatedData, {returnDocument: 'after'}).exec();
+async function updateUser(userDetails) {
+    // Find user
+    let user = await User.findById(userDetails.userID).exec();
 
+    // Update user data
+    if (userDetails.updatedData.password) {
+        // If password is included in the update, hash it
+        userDetails.updatedData.password = await hashString(userDetails.updatedData.password);
+    }
+
+    // Update email
+    if (userDetails.updatedData.email) {
+        user.email = userDetails.updatedData.email;
+    }
+
+    // Update username
+
+    if (userDetails.updatedData.username) {
+        user.username = userDetails.updatedData.username;
+    }
+
+    // Save the updated user
+    return await user.save();
 }
 
 async function deleteUser(userID){
