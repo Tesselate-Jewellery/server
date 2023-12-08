@@ -225,18 +225,15 @@ databaseConnector(databaseURL).then(() => {
     // Iterate through the quotes array, using for-of to enable async/await.
     for (const quote of quotes) {
 
-        const randomAdminId = usersCreated
-        .filter(user => adminUsernames.includes(user.username))
-        .map(user => user.id)
-        [Math.floor(Math.random() * adminUsernames.length)];
+
+        // Pick a random user and assign that user as the creator of the quote
+        quote.createdBy = usersCreated[Math.floor(Math.random() * usersCreated.length)].id
 
         const randomOpalId = opalsCreated
         .filter(opal => opalNames.includes(opal.name))
         .map(opal => opal.id)
         [Math.floor(Math.random() * opalNames.length)];
-
-        // Assign randomly selected admin ID to the createdBy Opal field
-        quote.createdBy = randomAdminId;
+;
         // Assign randomly selected opal ID to the opal field 
         quote.opal = randomOpalId
     }

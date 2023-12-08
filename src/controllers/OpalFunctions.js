@@ -9,12 +9,12 @@ async function getOpalById(OpalID){
     return await Opal.findById(OpalID).exec();
 }
 
-async function getPostsByAdmin(userID){
+async function getOpalsByAdmin(userID){
     return await Opal.find({createdBy: userID}).exec();
 }
 
-async function createOpal(OpalDetails){
-    return await Opal.create(OpalDetails);
+async function createOpal(opalDetails){
+    return await Opal.create(opalDetails);
 }
 
 async function updateOpal(opalDetails){
