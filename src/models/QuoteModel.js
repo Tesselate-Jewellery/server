@@ -24,6 +24,10 @@ const QuoteSchema = new mongoose.Schema({
         ref: 'Opal', 
         required: true 
     },
+    createdAt: {
+      type: Date,
+      default: new Date(),
+    },
     createdBy: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User', 
