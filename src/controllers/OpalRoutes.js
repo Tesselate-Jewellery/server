@@ -34,14 +34,14 @@ router.get('/:opalID', async (request, response) => {
 
 // Create an opal
 router.post('/', async (request, response) => {
-    response.json(await createOpal(request.body.opalDetails));
+    response.json(await createOpal(request.body));
 });
 
 // Update a specific opal
 router.put('/:opalID', async (request, response) => {
     let opalDetails = {
         opalID: request.params.opalID,
-        updatedData: request.body.newPostData
+        updatedData: request.body
     };
 
     response.json(await updateOpal(opalDetails));
