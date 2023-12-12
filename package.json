@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-dev": "CHOKIDAR_USEPOLLING=true NODE_ENV=development nodemon src/index.js",
-    "seed": "NODE_ENV=development WIPE=true node src/seeds.js"
+    "start-prod":"CHOKIDAR_USEPOLLING=true NODE_ENV=production node src/index.js",
+    "seed-dev": "NODE_ENV=development WIPE=true node src/seeds.js"
   },
   "keywords": [],
   "author": "",
