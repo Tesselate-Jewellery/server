@@ -10,13 +10,17 @@ const jwt = require('jsonwebtoken');
 const { Role } = require('../models/RoleModel');
 const { User } = require('../models/UserModel');
 
+// Import User functions
 const {
     encryptString, decryptString, decryptObject, hashString, validateHashedData, 
     generateJWT, generateUserJWT, verifyUserJWT, 
     getAllUsers, getSpecificUser, createUser, updateUser, deleteUser
 } = require('./UserFunctions');
 
-const { getRoleId } = require('../utils');
+// Import utility functions
+const { 
+    getRoleId, verifyJwtHeader, verifyJwtRole, onlyAllowAdmins 
+} = require('../utils');
 
 
 
@@ -44,6 +48,16 @@ const handleErrors = async (error, request, response, next) => {
     }
 }
 
+
+// All involved middleware must be attached to either
+// the app (Express instance), or the router (Express router instance)
+// or the specific route.
+router.get('/someProtectedRoute', verifyJwtHeader, verifyJwtRole, onlyAllowAdmins, (request, response) => {
+    
+    // No actual functionality here - focus on the middleware!
+    response.json({message: "Hello authorized world!"});
+});
+
 // Sign-up a new user
 router.post('/sign-up', uniqueEmailCheck, handleErrors, async (request, response) => {
     let userDetails = {
@@ -63,24 +77,34 @@ router.post('/sign-up', uniqueEmailCheck, handleErrors, async (request, response
 
 // Sign-in an existing user
 router.post('/sign-in', async (request, response) => {
-    let targetUser = await User.findOne({email: request.body.email}).exec();
+    try {
+        let targetUser = await User.findOne({ email: request.body.email }).exec();
 
-    if (await validateHashedData(request.body.password, targetUser.password)){
-        let encryptedUserJwt = await generateUserJWT(
-            {
-                userID: targetUser.id,
-                email: targetUser.email,
-                password: targetUser.password
+        if (targetUser) {
+            // User found, proceed with password validation
+            if (await validateHashedData(request.body.password, targetUser.password)) {
+                let encryptedUserJwt = await generateUserJWT({
+                    userID: targetUser.id,
+                    email: targetUser.email,
+                    password: targetUser.password
+                });
+
+                response.json(encryptedUserJwt);
+            } else {
+                // Password incorrect
+                response.status(400).json({ message: "Invalid user details provided." });
             }
-        );
-
-        response.json(encryptedUserJwt);
-
-    } else {
-        response.status(400).json({message:"Invalid user details provided."});
+        } else {
+            // User not found
+            // Same error message as "password incorrect", so you cannot decipher
+            // an email exists in the database through brute force
+            response.status(404).json({ message: "Invalid user details provided." });
+        }
+    } catch (error) {
+        console.error("Error in sign-in:", error);
+        response.status(500).json({ error: "Internal Server Error" });
     }
 });
-
 // Extend a user's JWT validity
 router.post('/token-refresh', async(request, response) => {
     let oldToken = request.body.jwt;

@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const OpalSchema = new mongoose.Schema({
     name: { 
         type: String,
-        required: true, 
-        unique: true 
+        required: true,  
+        unique: false
     },
     dimensions: {
         type: String,
