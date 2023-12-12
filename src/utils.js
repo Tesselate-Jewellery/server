@@ -35,6 +35,9 @@ const verifyJwtRole = async (request, response, next) => {
         let decryptedJwtPayload = decryptString(userJwtVerified.payload.data);
         // Parse the decrypted data into an object.
         let userData = JSON.parse(decryptedJwtPayload);
+
+        // Set user ID in the request headers
+        request.headers.userID = userData.userID;
     
         // Because the JWT doesn't include role info, we must find the full user document first:
         let userDoc = await User.findById(userData.userID).exec();

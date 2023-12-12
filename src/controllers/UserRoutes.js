@@ -97,7 +97,7 @@ router.post('/sign-in', async (request, response) => {
         } else {
             // User not found
             // Same error message as "password incorrect", so you cannot decipher
-            // an email exists in the database through brute force.
+            // an email exists in the database through brute force
             response.status(404).json({ message: "Invalid user details provided." });
         }
     } catch (error) {
