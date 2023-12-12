@@ -3,12 +3,22 @@ const express = require('express');
 // Create an instance of an Express Router
 const router = express.Router();
 
+const jwt = require('jsonwebtoken');
+const { Role } = require('../models/RoleModel');
+const { Quote } = require('../models/QuoteModel');
+const { verifyUserJWT, decryptString } = require('./UserFunctions');
+const { User } = require('../models/UserModel');
+
+const { 
+    verifyJwtHeader, verifyJwtRole, onlyAllowAdmins, onlyAllowAdminsAndStaff 
+} = require('../utils');
+
 const {
     getAllQuotes, getQuoteById, getQuotesByUser, createQuote, updateQuote, deleteQuote
 } = require('./QuoteFunctions');
 
 // Show all quotes
-router.get('/', async (request, response) => {
+router.get('/', verifyJwtHeader, verifyJwtRole, onlyAllowAdminsAndStaff, async (request, response) => {
     let allQuotes = await getAllQuotes();
 
     response.json({
@@ -17,8 +27,8 @@ router.get('/', async (request, response) => {
     });
 });
 
-// Show opals by specific user
-router.get('/user/:userID', async (request, response) => {
+// Show quotes by specific user
+router.get('/user/:userID', verifyJwtHeader, verifyJwtRole, onlyAllowAdminsAndStaff, async (request, response) => {
     let quotesByUser = await getQuotesByUser(request.params.userID);
 
     response.json({
@@ -28,27 +38,44 @@ router.get('/user/:userID', async (request, response) => {
 });
 
 // Show specific quote by ID
-router.get('/:quoteID', async (request, response) => {
+router.get('/:quoteID', verifyJwtHeader, verifyJwtRole, onlyAllowAdminsAndStaff, async (request, response) => {
     response.json(await getQuoteById(request.params.quoteID));
 });
 
 // Create a quote
-router.post('/', async (request, response) => {
-    response.json(await createQuote(request.body.quoteDetails));
+router.post('/', verifyJwtRole, async (request, response) => {
+    try {
+        // Get the user ID from the JWT payload
+        const userId = request.headers.userID;
+
+        // Combine opalDetails with createdBy field
+        const quoteDetails = {
+            ...request.body,
+            createdBy: userId,
+        };
+
+        // Create quote
+        const createdQuote = await createQuote(quoteDetails);
+
+        response.json(createdQuote);
+    } catch (error) {
+        console.error("Error in creating quote:", error);
+        response.status(500).json({ error: "Internal Server Error" });
+    }
 });
 
 // Update a specific quote
-router.put('/:quoteID', async (request, response) => {
+router.put('/:quoteID', verifyJwtHeader, verifyJwtRole, onlyAllowAdminsAndStaff, async (request, response) => {
     let quoteDetails = {
         quoteID: request.params.quoteID,
-        updatedData: request.body.newPostData
+        updatedData: request.body
     };
 
     response.json(await updateQuote(quoteDetails));
 });
 
 // Delete a specific quote
-router.delete('/:quoteID', async (request, response) => {
+router.delete('/:quoteID', verifyJwtHeader, verifyJwtRole, onlyAllowAdmins, async (request, response) => {
     response.json(await deleteQuote(request.params.quoteID));
 });
 

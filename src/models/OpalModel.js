@@ -4,6 +4,7 @@ const OpalSchema = new mongoose.Schema({
     name: { 
         type: String,
         required: true,  
+        unique: false
     },
     dimensions: {
         type: String,

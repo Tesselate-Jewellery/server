@@ -19,7 +19,7 @@ async function createQuote(quoteDetails){
 
 async function updateQuote(quoteDetails){
     // Find quote, update it, return the updated opal data.
-    return await Quote.findByIdAndUpdate(quoteDetails.opalID, quoteDetails.updatedData, {returnDocument: 'after'}).exec();
+    return await Quote.findByIdAndUpdate(quoteDetails.quoteID, quoteDetails.updatedData, {returnDocument: 'after'}).exec();
 }
 
 async function deleteQuote(quoteID){
