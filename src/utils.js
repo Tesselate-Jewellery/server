@@ -58,6 +58,7 @@ const verifyJwtRole = async (request, response, next) => {
 // The actual authorization middleware.
 // Throw to the error-handling middleware
 // if the user is not authorized.
+// ADMIN authorization only 
 const onlyAllowAdmins = (request, response, next) => {
     if (request.headers.userRole == "admin"){
         next(); 
@@ -67,6 +68,17 @@ const onlyAllowAdmins = (request, response, next) => {
     }
 }
 
+// ADMIN and STAFF authorization only 
+const onlyAllowAdminsAndStaff = (request, response, next) => {
+    if (request.headers.userRole == "admin" || request.headers.userRole == "staff"){
+        next(); 
+    } else {
+        // Send a JSON error response
+        response.status(403).json({error:"User not authorized"});
+    }
+}
+
 module.exports = {
-    getRoleId, verifyJwtHeader, verifyJwtRole, onlyAllowAdmins
+    getRoleId, verifyJwtHeader, verifyJwtRole, 
+    onlyAllowAdmins, onlyAllowAdminsAndStaff
 }

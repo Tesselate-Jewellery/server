@@ -7,6 +7,16 @@ const {
     getAllOpals, getOpalById, getOpalsByAdmin, createOpal, updateOpal, deleteOpal
 } = require('./OpalFunctions');
 
+const jwt = require('jsonwebtoken');
+const { Role } = require('../models/RoleModel');
+const { Opal } = require('../models/OpalModel');
+const { verifyUserJWT, decryptString } = require('./UserFunctions');
+const { User } = require('../models/UserModel');
+
+const { 
+    verifyJwtHeader, verifyJwtRole, onlyAllowAdmins, onlyAllowAdminsAndStaff 
+} = require('../utils');
+
 // Show all opals
 router.get('/', async (request, response) => {
     let allOpals = await getAllOpals();
@@ -38,7 +48,7 @@ router.post('/', async (request, response) => {
 });
 
 // Update a specific opal
-router.put('/:opalID', async (request, response) => {
+router.put('/:opalID', verifyJwtHeader, verifyJwtRole, onlyAllowAdminsAndStaff, async (request, response) => {
     let opalDetails = {
         opalID: request.params.opalID,
         updatedData: request.body
