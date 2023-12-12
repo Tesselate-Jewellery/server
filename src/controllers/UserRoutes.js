@@ -3,6 +3,11 @@ const express = require('express');
 // Create an instance of an Express Router
 const router = express.Router();
 
+// Import JWT
+const jwt = require('jsonwebtoken');
+
+// Import models as needed
+const { Role } = require('../models/RoleModel');
 const { User } = require('../models/UserModel');
 
 const {
