@@ -6,6 +6,8 @@ app.listen(PORT, HOST, () => {
     console.log(`
     ExpressJS Tesselate Bespoke Jewellery API is now running!
 
+    Server is running on ${PORT} 
+    
     Congrats!
     `);
 });
