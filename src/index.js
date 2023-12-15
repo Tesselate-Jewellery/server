@@ -2,12 +2,12 @@
 var {app, PORT, HOST} = require('./server');
 
 // Run the server
-app.listen(PORT, HOST, () => {
+app.listen(PORT, () => {
     console.log(`
     ExpressJS Tesselate Bespoke Jewellery API is now running!
 
     Server is running on ${PORT} 
-    
+
     Congrats!
     `);
 });
