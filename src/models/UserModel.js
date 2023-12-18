@@ -36,6 +36,7 @@ async function (next) {
     if (!user.isModified('password')) return next();
     // If password was changed, assume it was changed to plaintext and hash it.
     const hash = await bcrypt.hash(this.password, 10);
+    // console.log("hashing again")
     this.password = hash;
     next();
 }
