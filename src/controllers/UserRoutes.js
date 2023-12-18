@@ -73,12 +73,15 @@ router.post('/sign-up', uniqueEmailCheck, handleErrors, async (request, response
         user: newUserDoc
     });
 
+    // console.log(userDetails);
+
 });
 
 // Sign-in an existing user
 router.post('/sign-in', async (request, response) => {
     try {
         let targetUser = await User.findOne({ email: request.body.email }).exec();
+        // console.log(targetUser);
 
         if (targetUser) {
             // User found, proceed with password validation

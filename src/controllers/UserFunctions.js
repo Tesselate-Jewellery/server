@@ -104,18 +104,18 @@ async function getSpecificUser(userID){
 async function createUser(userDetails){
 
     // Hash the password
-    userDetails.hashedPassword = await hashString(userDetails.password);
+    // DO NOT IMPLEMENT THIS LINE OF CODE, THIS IS HASHING THE PASSWORD AGAIN. 
+    //userDetails.hashedPassword = await hashString(userDetails.password);
 
     // Create new user based on userDetails data
     let newUser = new User(
         { 
             email: userDetails.email,
             username: userDetails.username,
-            password: userDetails.hashedPassword,
+            password: userDetails.password,
             role: userDetails.roleID
         }
     )
-    
     // And save it to DB
     return await newUser.save();
 }
