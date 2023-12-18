@@ -59,7 +59,7 @@ function generateJWT(payloadObj){
 }
 
 
-async function generateUserJWT(userDetails){
+async function generateUserJWT(userDetails){    
     // Encrypt the payload so that it's not plaintext when viewed outside of this app.
     let encryptedUserData = encryptString(JSON.stringify(userDetails));
     // The expiresIn option only works if the payload is an object, not a string.
