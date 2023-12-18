@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-dev": "CHOKIDAR_USEPOLLING=true NODE_ENV=development nodemon src/index.js",
-    "start-prod":"CHOKIDAR_USEPOLLING=true NODE_ENV=production node src/index.js",
+    "start-prod": "CHOKIDAR_USEPOLLING=true NODE_ENV=production node src/index.js",
     "seed-dev": "NODE_ENV=development WIPE=true node src/seeds.js",
     "seed-prod": "NODE_ENV=production WIPE=true node src/seeds.js"
   },
@@ -15,7 +15,6 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
-    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
