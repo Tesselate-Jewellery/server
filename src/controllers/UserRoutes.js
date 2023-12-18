@@ -92,7 +92,7 @@ router.post('/sign-in', async (request, response) => {
                 response.json(encryptedUserJwt);
             } else {
                 // Password incorrect
-                response.status(400).json({ message: "Invalid user details provided." });
+                response.status(400).json({ message: "Invalid password provided." });
             }
         } else {
             // User not found
