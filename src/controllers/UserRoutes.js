@@ -105,6 +105,7 @@ router.post('/sign-in', async (request, response) => {
         response.status(500).json({ error: "Internal Server Error" });
     }
 });
+
 // Extend a user's JWT validity
 router.post('/token-refresh', async(request, response) => {
     let oldToken = request.body.jwt;
