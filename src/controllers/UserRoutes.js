@@ -92,13 +92,13 @@ router.post('/sign-in', async (request, response) => {
                 response.json(encryptedUserJwt);
             } else {
                 // Password incorrect
-                response.status(400).json({ message: "Incorrect user details." });
+                response.status(400).json({ error: "Incorrect user details." });
             }
         } else {
             // User not found
             // Same error message as "password incorrect", so you cannot decipher
             // an email exists in the database through brute force
-            response.status(404).json({ message: "Incorrect user details" });
+            response.status(404).json({ error: "Incorrect user details" });
         }
     } catch (error) {
         console.error("Error in sign-in:", error);
