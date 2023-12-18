@@ -18,7 +18,7 @@ const {
 } = require('../utils');
 
 // Show all opals
-router.get('/', async (request, response) => {
+router.get('/', verifyJwtHeader, verifyJwtRole, onlyAllowAdminsAndStaff, async (request, response) => {
     let allOpals = await getAllOpals();
 
     response.json({
