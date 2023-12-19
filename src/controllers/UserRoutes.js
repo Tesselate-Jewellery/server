@@ -92,7 +92,13 @@ router.post('/sign-in', async (request, response) => {
                     password: targetUser.password
                 });
 
-                response.json(encryptedUserJwt);
+            const responseObject = {
+                role: targetUser.role,
+                jwt: encryptedUserJwt
+            }
+
+            response.json(responseObject);
+
             } else {
                 // Password incorrect
                 response.status(400).json({ error: "Incorrect user details." });
