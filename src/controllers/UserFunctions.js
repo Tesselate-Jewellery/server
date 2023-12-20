@@ -128,7 +128,6 @@ async function updateUser(userDetails) {
     if (userDetails.updatedData.password) {
         // If password is included in the update, hash it
         user.password = userDetails.updatedData.password 
-
     }
 
     // Update email
