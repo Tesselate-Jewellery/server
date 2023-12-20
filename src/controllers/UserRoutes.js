@@ -94,7 +94,8 @@ router.post('/sign-in', async (request, response) => {
 
             const responseObject = {
                 role: targetUser.role,
-                jwt: encryptedUserJwt
+                jwt: encryptedUserJwt,
+                userID: targetUser.id
             }
 
             response.json(responseObject);
