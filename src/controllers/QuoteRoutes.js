@@ -28,7 +28,7 @@ router.get('/', verifyJwtHeader, verifyJwtRole, onlyAllowAdminsAndStaff, async (
 });
 
 // Show quotes by specific user
-router.get('/quotes/:userID', verifyJwtHeader, verifyJwtRole, onlyAllowAdminsAndStaff, async (request, response) => {
+router.get('/user/:userID', verifyJwtHeader, verifyJwtRole, onlyAllowAdminsAndStaff, async (request, response) => {
     let quotesByUser = await getQuotesByUser(request.params.userID);
 
     response.json({
