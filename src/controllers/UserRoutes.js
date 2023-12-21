@@ -48,16 +48,6 @@ const handleErrors = async (error, request, response, next) => {
     }
 }
 
-
-// All involved middleware must be attached to either
-// the app (Express instance), or the router (Express router instance)
-// or the specific route.
-router.get('/someProtectedRoute', verifyJwtHeader, verifyJwtRole, onlyAllowAdmins, (request, response) => {
-    
-    // No actual functionality here - focus on the middleware!
-    response.json({message: "Hello authorized world!"});
-});
-
 // Sign-up a new user
 router.post('/sign-up', uniqueEmailCheck, handleErrors, async (request, response) => {
     let userDetails = {
@@ -124,22 +114,26 @@ router.post('/token-refresh', async(request, response) => {
 });
 
 // Update a user
-router.put('/:userID', async (request, response) => {
-    let userDetails = {
+router.put('/:userID', verifyJwtHeader, async (request, response) => {
+    try{
+        let userDetails = {
         userID: request.params.userID,
         updatedData: request.body
     }
 
     response.json(await updateUser(userDetails));
+    } catch (error) {
+        response.json({ error: 'An error occurred, please try again!' });
+    } 
 });
 
 // Delete a user
-router.delete('/:userID', async (request, response) => {
+router.delete('/:userID', verifyJwtHeader, verifyJwtRole, onlyAllowAdmins, async (request, response) => {
     response.json(await deleteUser(request.params.userID));
 });
 
 // List all users
-router.get('/', async (request, response) => {
+router.get('/', verifyJwtHeader, verifyJwtRole, onlyAllowAdmins, async (request, response) => {
     let allUsers = await getAllUsers();
 
     response.json({
@@ -149,7 +143,7 @@ router.get('/', async (request, response) => {
 });
 
 // Show a specific user
-router.get('/:userID', async (request, response) => {
+router.get('/:userID', verifyJwtHeader, verifyJwtRole, onlyAllowAdmins, async (request, response) => {
     response.json(await getSpecificUser(request.params.userID));
 });
 
