@@ -3,17 +3,15 @@ const mongoose = require("mongoose");
 const QuoteSchema = new mongoose.Schema({
     metal: { 
         type: String, 
-        enum: ['', 'Silver', '9ct Gold', '18ct Gold'], 
-        required: true 
+        required: false
     },
     setting: { 
         type: String, 
-        enum: ['', 'bezel', 'claw'], 
-        required: true 
+        required: false 
     },
     ringSize: { 
         type: String, 
-        required: true 
+        required: false 
     },
     pricing: { 
         type: Number, 
