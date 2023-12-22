@@ -150,10 +150,10 @@ const opals = [
         createdBy: null
     },
     {
-        name: "Pastel Dove Opal",
+        name: "Shimmering Mysic Opal",
         dimensions: "10x14mm",
         weight: 1.23,
-        origin: "Coober Pedy, South Australia",
+        origin: "Lightning Ridge, NSW",
         brightness: "3/5",
         tone: "N4",
         pricing: 1220,
