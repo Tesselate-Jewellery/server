@@ -73,38 +73,93 @@ const users = [
 // OPALS SEED
 const opals = [
     {
-        name: "orange rainbow opal",
+        name: "Orange Rainbow Opal",
         dimensions: "9x7mm",
         weight: 1.05,
         origin: "Coober Pedy, South Australia",
         brightness: "3.5/5",
         tone: "N8",
-        pricing: 699,
-        image: "placeholdertext.url",
+        pricing: 540,
+        image: "/assets/opal_1.jpg",
         createdBy: null
     },
     {
-        name: "blue mint opal",
+        name: "Blue Rainbow Opal",
         dimensions: "3x4mm",
         weight: 0.75,
         origin: "Coober Pedy, South Australia",
         brightness: "4/5",
-        tone: "N8",
-        pricing: 399,
-        image: "placeholdertext.url",
+        tone: "N/A",
+        pricing: 799,
+        image: "/assets/opal_2.jpg",
         createdBy: null
     },
     {
-        name: "red horizon opal",
+        name: "Green River Opal",
         dimensions: "6x9mm",
         weight: 1.00,
         origin: "Coober Pedy, South Australia",
         brightness: "4.5/5",
-        tone: "N8",
+        tone: "N9",
         pricing: 999,
-        image: "placeholdertext.url",
+        image: "/assets/opal_3.jpg",
         createdBy: null
-    }
+    },
+    {
+        name: "Pastel Dove Opal",
+        dimensions: "10x14mm",
+        weight: 1.23,
+        origin: "Coober Pedy, South Australia",
+        brightness: "3/5",
+        tone: "N4",
+        pricing: 1220,
+        image: "/assets/opal_4.jpg",
+        createdBy: null
+    },
+    {
+        name: "Faded Fire Opal",
+        dimensions: "4x7mm",
+        weight: 0.85,
+        origin: "Coober Pedy, South Australia",
+        brightness: "2/5",
+        tone: "N/A",
+        pricing: 199,
+        image: "/assets/opal_5.jpg",
+        createdBy: null
+    },
+    {
+        name: "Brilliant Rainbow Opal",
+        dimensions: "6x7mm",
+        weight: 1.00,
+        origin: "Coober Pedy, South Australia",
+        brightness: "5/5",
+        tone: "N9",
+        pricing: 1645,
+        image: "/assets/opal_6.jpg",
+        createdBy: null
+    },
+    {
+        name: "White Mystic Opal",
+        dimensions: "10x12mm",
+        weight: 1.13,
+        origin: "Coober Pedy, South Australia",
+        brightness: "3.5/5",
+        tone: "N/A",
+        pricing: 545,
+        image: "/assets/opal_7.jpg",
+        createdBy: null
+    },
+    {
+        name: "Pastel Dove Opal",
+        dimensions: "10x14mm",
+        weight: 1.23,
+        origin: "Coober Pedy, South Australia",
+        brightness: "3/5",
+        tone: "N4",
+        pricing: 1220,
+        image: "/assets/opal_8.jpg",
+        createdBy: null
+    },
 ];
 
 // QUOTES SEED
