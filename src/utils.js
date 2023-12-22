@@ -18,14 +18,19 @@ async function getRoleId(roleName) {
 // Make sure the JWT available in the headers is valid,
 // and refresh it to keep the JWT usable for longer.
 const verifyJwtHeader = async (request, response, next) => {
-    let rawJwtHeader = request.headers.jwt;
+    try{ 
+        let rawJwtHeader = request.headers.jwt;
 
-    let jwtRefresh = await verifyUserJWT(rawJwtHeader);
+        let jwtRefresh = await verifyUserJWT(rawJwtHeader);
 
-    request.headers.jwt = jwtRefresh;
+        request.headers.jwt = jwtRefresh;
 
-    next();
-}
+        next();
+    } catch (error) {
+        console.error("Error in verifyJwtHeader middleware:", error);
+        response.status(500).json({ error: "Internal Server Error" });
+    }
+};
 
 const verifyJwtRole = async (request, response, next) => {
     try {
@@ -47,7 +52,6 @@ const verifyJwtRole = async (request, response, next) => {
         // Note that the user's role will never be available on the front-end
         // with this technique.
         // This means they can't just manipulate the JWT to access admin stuff.
-        console.log("User role is: " + userRoleName.name);
         request.headers.userRole = userRoleName.name;
     
         next();
