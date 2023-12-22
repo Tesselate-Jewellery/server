@@ -22,6 +22,7 @@ router.get('/', async (request, response) => {
     let allOpals = await getAllOpals();
 
     response.json({
+        // Returns a count of how many opals in database
         opalsCount: allOpals.length,
         opalsArray: allOpals
     });

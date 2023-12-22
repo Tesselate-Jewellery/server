@@ -19,6 +19,8 @@ dotenv.config();
 
 // Create some raw data for the Roles collection,
 // obeying the needed fields from the Role schema.
+
+// ROLES SEED
 const roles = [
     {
         name: "admin",
@@ -34,7 +36,7 @@ const roles = [
     }
 ]
 
-// To fill in after creating user data encryption functionality.
+// USERS SEED
 const users = [
     {
         username: "admin1",
@@ -68,7 +70,7 @@ const users = [
     },
 ];
 
-// To fill in after creating users successfully.
+// OPALS SEED
 const opals = [
     {
         name: "orange rainbow opal",
@@ -105,8 +107,7 @@ const opals = [
     }
 ];
 
-// To fill in after creating opals successfully.
-
+// QUOTES SEED
 const quotes = [
     {
         metal: "Silver",

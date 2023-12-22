@@ -39,7 +39,9 @@ describe('Opal Model Tests', () => {
             createdBy: userId, // Provide the user ID
         };
 
+        // Create new opal instance with the test opal data
         const opal = new Opal(opalData);
+        // Save the opal to the database and await result
         const savedOpal = await opal.save();
 
         expect(savedOpal._id).toBeDefined();

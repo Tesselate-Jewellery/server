@@ -21,6 +21,7 @@ describe('Role Model Tests', () => {
         const role = new Role(roleData);
         const savedRole = await role.save();
 
+        // Expect the role id to exist
         expect(savedRole._id).toBeDefined();
         expect(savedRole.name).toBe(roleData.name);
         expect(savedRole.description).toBe(roleData.description);
