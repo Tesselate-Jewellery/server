@@ -284,14 +284,11 @@ databaseConnector(databaseURL).then(() => {
 
         // Pick a random user and assign that user as the creator of the quote
         quote.createdBy = usersCreated[Math.floor(Math.random() * usersCreated.length)].id
-
-        const randomOpalId = opalsCreated
-        .filter(opal => opalNames.includes(opal.name))
-        .map(opal => opal.id)
-        [Math.floor(Math.random() * opalNames.length)];
+        
+        // Pick a random opal and assign id to quote
+        quote.opal = opalsCreated[Math.floor(Math.random() * opalsCreated.length)].id
 ;
-        // Assign randomly selected opal ID to the opal field 
-        quote.opal = randomOpalId
+        
     }
 
     // Then save the quotes to the database.
