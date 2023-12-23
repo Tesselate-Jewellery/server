@@ -143,7 +143,10 @@ router.get('/', verifyJwtHeader, verifyJwtRole, onlyAllowAdmins, async (request,
 });
 
 // Show a specific user
-router.get('/:userID', verifyJwtHeader, verifyJwtRole, onlyAllowAdmins, async (request, response) => {
+// Initially wanted to implement only allowing Admins access,
+// However, then my username and email fields do not populate in front end
+// Find a FIX in the future
+router.get('/:userID', verifyJwtHeader, async (request, response) => {
     response.json(await getSpecificUser(request.params.userID));
 });
 
