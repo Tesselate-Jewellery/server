@@ -27,7 +27,7 @@ app.use(helmet.contentSecurityPolicy({
 // array of origins for CORS configuration.
 const cors = require('cors');
 var corsOptions = {
-    origin: ["http://localhost:3000", "http://localhost:3000/", "https://deployedApp.com"],
+    origin: ["http://localhost:3000", "http://localhost:3000/", "https://tesselate-bespoke-jewellery.netlify.app"],
     optionsSuccessStatus: 200
 }
 app.use(cors(corsOptions));
