@@ -287,8 +287,6 @@ databaseConnector(databaseURL).then(() => {
         
         // Pick a random opal and assign id to quote
         quote.opal = opalsCreated[Math.floor(Math.random() * opalsCreated.length)].id
-;
-        
     }
 
     // Then save the quotes to the database.
